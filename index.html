@@ -1,0 +1,2211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brandplus Studio — Where Imagination Meets Reality</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@300;400;500;600;700;900&family=Barlow+Condensed:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --navy-mid: #112240;
+    --navy-light: #1A3A5C;
+    --gold: #F5B800;
+    --gold-dark: #C99300;
+    --orange: #E8621A;
+    --orange-light: #FF7B2E;
+    --white: #FFFFFF;
+    --off-white: #F8F5EF;
+    --gray-light: #E8E4DC;
+    --text-muted: #8899AA;
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-condensed: 'Barlow Condensed', sans-serif;
+    --font-body: 'Barlow', sans-serif;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --shadow-gold: 0 4px 30px rgba(245, 184, 0, 0.25);
+    --shadow-card: 0 8px 40px rgba(10, 22, 40, 0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--off-white);
+    color: var(--navy);
+    overflow-x: hidden;
+  }
+
+  /* ── NAVIGATION ── */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background: rgba(10, 22, 40, 0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(245, 184, 0, 0.2);
+    transition: var(--transition);
+  }
+
+  .nav-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .nav-logo-img {
+    width: 52px;
+    height: 52px;
+    border-radius: 8px;
+    object-fit: cover;
+    border: 2px solid var(--gold);
+  }
+
+  .nav-logo-fallback {
+    width: 52px;
+    height: 52px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--gold) 0%, var(--orange) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 20px;
+    color: var(--navy);
+    border: 2px solid var(--gold);
+    flex-shrink: 0;
+  }
+
+  .nav-brand {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav-brand-name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    color: var(--white);
+    letter-spacing: 1px;
+    line-height: 1;
+  }
+
+  .nav-brand-sub {
+    font-family: var(--font-condensed);
+    font-size: 10px;
+    color: var(--gold);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-top: 2px;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    list-style: none;
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 8px 16px;
+    font-family: var(--font-condensed);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    transition: var(--transition);
+    cursor: pointer;
+  }
+
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--gold);
+  }
+
+  .nav-cta {
+    background: var(--gold) !important;
+    color: var(--navy) !important;
+    border-radius: 6px;
+    padding: 8px 20px !important;
+    margin-left: 8px;
+  }
+
+  .nav-cta:hover {
+    background: var(--orange) !important;
+    color: var(--white) !important;
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--white);
+    border-radius: 2px;
+    transition: var(--transition);
+  }
+
+  /* ── PAGES ── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: var(--navy);
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .hero-bg-poster {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2px;
+    opacity: 0.18;
+  }
+
+  .hero-bg-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.5);
+  }
+
+  .hero-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(10,22,40,0.95) 0%, rgba(10,22,40,0.7) 60%, rgba(26,58,92,0.5) 100%);
+  }
+
+  .hero-diagonal {
+    position: absolute;
+    top: 0; right: 0;
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(245,184,0,0.06), transparent);
+    clip-path: polygon(15% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 120px 2rem 80px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero-left { }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(245, 184, 0, 0.15);
+    border: 1px solid rgba(245, 184, 0, 0.4);
+    border-radius: 100px;
+    padding: 6px 16px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.4); }
+  }
+
+  .hero-badge span {
+    font-family: var(--font-condensed);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 700;
+  }
+
+  .hero-heading {
+    font-family: var(--font-display);
+    font-size: clamp(52px, 7vw, 86px);
+    line-height: 0.95;
+    color: var(--white);
+    letter-spacing: 2px;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-heading .accent { color: var(--gold); }
+  .hero-heading .stroke {
+    -webkit-text-stroke: 2px var(--gold);
+    color: transparent;
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.7;
+    max-width: 440px;
+    margin-bottom: 2.5rem;
+    font-weight: 300;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold);
+    color: var(--navy);
+    font-family: var(--font-condensed);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+  }
+
+  .btn-primary:hover {
+    background: var(--orange);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold);
+  }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: var(--white);
+    font-family: var(--font-condensed);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 13px 28px;
+    border-radius: 6px;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: var(--transition);
+    text-decoration: none;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    transform: translateY(-2px);
+  }
+
+  .hero-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-visual-frame {
+    position: relative;
+    width: 100%;
+    max-width: 520px;
+  }
+
+  .hero-poster-main {
+    width: 100%;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 2px solid rgba(245,184,0,0.3);
+    display: block;
+  }
+
+  .hero-poster-fallback {
+    width: 100%;
+    aspect-ratio: 4/5;
+    border-radius: 16px;
+    background: linear-gradient(145deg, var(--navy-mid) 0%, var(--navy-light) 100%);
+    border: 2px solid rgba(245,184,0,0.3);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .hero-logo-big {
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+  }
+
+  .hero-logo-big-fallback {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, var(--gold), var(--orange));
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-size: 48px;
+    color: var(--navy);
+  }
+
+  .hero-visual-badge {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    background: var(--gold);
+    color: var(--navy);
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-family: var(--font-condensed);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+
+  .hero-visual-badge .num {
+    font-family: var(--font-display);
+    font-size: 36px;
+    line-height: 1;
+    display: block;
+  }
+
+  .hero-visual-badge .label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    opacity: 0.8;
+  }
+
+  .hero-visual-tag {
+    position: absolute;
+    top: 24px;
+    right: -16px;
+    background: var(--orange);
+    color: var(--white);
+    border-radius: 8px;
+    padding: 10px 16px;
+    font-family: var(--font-condensed);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    transform: rotate(3deg);
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .hero-stat .num {
+    font-family: var(--font-display);
+    font-size: 32px;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .hero-stat .label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 4px;
+    font-family: var(--font-condensed);
+    font-weight: 600;
+  }
+
+  /* ── SECTION COMMON ── */
+  .section {
+    padding: 100px 2rem;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--font-condensed);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 2px;
+    background: var(--orange);
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 5vw, 64px);
+    color: var(--navy);
+    line-height: 1;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+  }
+
+  .section-title .accent { color: var(--orange); }
+
+  .section-sub {
+    font-size: 16px;
+    color: #556677;
+    line-height: 1.7;
+    max-width: 560px;
+    font-weight: 300;
+  }
+
+  .section-header {
+    margin-bottom: 3.5rem;
+  }
+
+  /* ── SERVICES STRIP ── */
+  .services-strip {
+    background: var(--navy);
+    padding: 80px 2rem;
+  }
+
+  .services-strip-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .services-strip .section-title { color: var(--white); }
+  .services-strip .section-sub { color: rgba(255,255,255,0.55); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .service-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(245,184,0,0.15);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--orange));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: var(--transition);
+  }
+
+  .service-card:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(245,184,0,0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  .service-card:hover::before { transform: scaleX(1); }
+
+  .service-card-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    background: rgba(245,184,0,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 1.25rem;
+  }
+
+  .service-card-title {
+    font-family: var(--font-condensed);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--white);
+    letter-spacing: 0.5px;
+    margin-bottom: 8px;
+  }
+
+  .service-card-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.6;
+  }
+
+  .service-card-arrow {
+    margin-top: 1.25rem;
+    color: var(--gold);
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: var(--font-condensed);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  /* ── CARDS GRID ── */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .product-card {
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition);
+    border: 1px solid rgba(10,22,40,0.06);
+  }
+
+  .product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 24px 60px rgba(10,22,40,0.2);
+  }
+
+  .product-card-img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+    background: var(--gray-light);
+  }
+
+  .product-card-img-placeholder {
+    width: 100%;
+    aspect-ratio: 4/3;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+  }
+
+  .product-card-body {
+    padding: 1.5rem;
+  }
+
+  .product-card-tag {
+    display: inline-block;
+    background: rgba(245,184,0,0.12);
+    color: var(--gold-dark);
+    font-family: var(--font-condensed);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+
+  .product-card-title {
+    font-family: var(--font-condensed);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+
+  .product-card-desc {
+    font-size: 14px;
+    color: #667788;
+    line-height: 1.6;
+  }
+
+  /* ── POSTER SECTION ── */
+  .poster-section {
+    position: relative;
+    padding: 120px 2rem;
+    background: var(--navy-mid);
+    overflow: hidden;
+  }
+
+  .poster-bg {
+    position: absolute;
+    inset: 0;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    opacity: 0.2;
+  }
+
+  .poster-bg-fallback {
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(245,184,0,0.03) 40px,
+      rgba(245,184,0,0.03) 80px
+    );
+  }
+
+  .poster-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(10,22,40,0.9), rgba(26,58,92,0.7));
+  }
+
+  .poster-content {
+    position: relative;
+    z-index: 2;
+    max-width: 1280px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .poster-content .section-title { color: var(--white); }
+  .poster-content .section-sub { color: rgba(255,255,255,0.6); margin: 0 auto; }
+
+  /* ── ABOUT ── */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-image-stack {
+    position: relative;
+    height: 500px;
+  }
+
+  .about-img-main {
+    position: absolute;
+    top: 0; left: 0;
+    width: 75%;
+    height: 380px;
+    object-fit: cover;
+    border-radius: 16px;
+    display: block;
+  }
+
+  .about-img-secondary {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 55%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 16px;
+    border: 6px solid var(--off-white);
+    display: block;
+  }
+
+  .about-img-placeholder {
+    border-radius: 16px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+  }
+
+  .about-img-placeholder.main {
+    position: absolute;
+    top: 0; left: 0;
+    width: 75%;
+    height: 380px;
+  }
+
+  .about-img-placeholder.secondary {
+    position: absolute;
+    bottom: 0; right: 0;
+    width: 55%;
+    height: 260px;
+    border: 6px solid var(--off-white);
+  }
+
+  .about-accent-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--gold);
+    color: var(--navy);
+    padding: 20px 24px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.25);
+    z-index: 2;
+  }
+
+  .about-accent-box .num {
+    font-family: var(--font-display);
+    font-size: 42px;
+    line-height: 1;
+  }
+
+  .about-accent-box .lbl {
+    font-family: var(--font-condensed);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    opacity: 0.8;
+    margin-top: 4px;
+  }
+
+  .values-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .values-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    color: #445566;
+    line-height: 1.6;
+  }
+
+  .values-list li::before {
+    content: '▸';
+    color: var(--gold-dark);
+    font-size: 12px;
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+
+  /* ── CONTACT ── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 2rem;
+  }
+
+  .contact-info-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: rgba(245,184,0,0.1);
+    border: 1px solid rgba(245,184,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .contact-info-label {
+    font-family: var(--font-condensed);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 4px;
+  }
+
+  .contact-info-value {
+    font-size: 15px;
+    color: var(--navy);
+    line-height: 1.5;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-family: var(--font-condensed);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #889aaa;
+    margin-bottom: 8px;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1.5px solid rgba(10,22,40,0.12);
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--navy);
+    background: var(--white);
+    transition: var(--transition);
+    outline: none;
+    resize: vertical;
+  }
+
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--gold-dark);
+    box-shadow: 0 0 0 3px rgba(245,184,0,0.12);
+  }
+
+  .form-group textarea { min-height: 120px; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: var(--navy);
+    padding: 80px 2rem 40px;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 2rem;
+  }
+
+  .footer-brand-name {
+    font-family: var(--font-display);
+    font-size: 28px;
+    color: var(--white);
+    letter-spacing: 1px;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .footer-brand-desc {
+    font-size: 14px;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
+    max-width: 280px;
+  }
+
+  .footer-heading {
+    font-family: var(--font-condensed);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-links a {
+    font-size: 14px;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .footer-links a:hover {
+    color: var(--gold);
+  }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .footer-bottom-social {
+    display: flex;
+    gap: 12px;
+  }
+
+  .footer-social-link {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(255,255,255,0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.5);
+    font-size: 16px;
+    transition: var(--transition);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .footer-social-link:hover {
+    background: var(--gold);
+    color: var(--navy);
+  }
+
+  /* ── PAGE HERO ── */
+  .page-hero {
+    padding: 160px 2rem 80px;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .page-hero-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0.1;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+
+  .page-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(10,22,40,0.6), rgba(10,22,40,0.95));
+  }
+
+  .page-hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .page-hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 8vw, 96px);
+    color: var(--white);
+    letter-spacing: 2px;
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+
+  .page-hero-title .accent { color: var(--gold); }
+
+  .page-hero-sub {
+    font-size: 16px;
+    color: rgba(255,255,255,0.55);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── BRANDING PAGE ── */
+  .branding-showcase {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+    padding: 80px 0;
+    border-bottom: 1px solid rgba(10,22,40,0.08);
+  }
+
+  .branding-showcase:last-child { border-bottom: none; }
+
+  .branding-showcase.reverse { direction: rtl; }
+  .branding-showcase.reverse > * { direction: ltr; }
+
+  .branding-img {
+    border-radius: 16px;
+    overflow: hidden;
+    aspect-ratio: 16/10;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 64px;
+  }
+
+  .branding-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ── MAP STYLE ── */
+  .map-visual {
+    background: var(--navy-mid);
+    border-radius: 16px;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    margin-top: 2rem;
+  }
+
+  .map-visual::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg, transparent, transparent 40px, rgba(245,184,0,0.05) 40px, rgba(245,184,0,0.05) 41px
+    ),
+    repeating-linear-gradient(
+      90deg, transparent, transparent 40px, rgba(245,184,0,0.05) 40px, rgba(245,184,0,0.05) 41px
+    );
+  }
+
+  .map-pin {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .map-pin-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--gold);
+    border-radius: 50% 50% 50% 0;
+    transform: rotate(-45deg);
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(245,184,0,0.4);
+  }
+
+  .map-pin-icon span {
+    transform: rotate(45deg);
+    font-size: 24px;
+  }
+
+  .map-pin p {
+    font-family: var(--font-condensed);
+    font-weight: 700;
+    color: var(--white);
+    font-size: 16px;
+    letter-spacing: 0.5px;
+  }
+
+  .map-pin small {
+    color: rgba(255,255,255,0.5);
+    font-size: 12px;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .page.active .hero-content > * {
+    animation: fadeUp 0.6s ease both;
+  }
+
+  .page.active .hero-left { animation-delay: 0.1s; }
+  .page.active .hero-right { animation-delay: 0.3s; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--orange) 50%, transparent 100%);
+    max-width: 100px;
+    border-radius: 2px;
+    margin: 1rem 0;
+  }
+
+  /* ── JERSEY GRID ── */
+  .jersey-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    transition: var(--transition);
+    border: 1px solid rgba(10,22,40,0.06);
+  }
+
+  .jersey-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 80px rgba(10,22,40,0.2);
+  }
+
+  .jersey-img-wrap {
+    width: 100%;
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #f0eee8 0%, #e8e4dc 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .jersey-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .jersey-card:hover .jersey-img-wrap img {
+    transform: scale(1.05);
+  }
+
+  .jersey-emoji {
+    font-size: 80px;
+  }
+
+  .jersey-badge {
+    position: absolute;
+    top: 12px; right: 12px;
+    background: var(--navy);
+    color: var(--gold);
+    font-family: var(--font-condensed);
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 6px;
+  }
+
+  .jersey-body {
+    padding: 1.5rem;
+  }
+
+  .jersey-name {
+    font-family: var(--font-condensed);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+
+  .jersey-desc {
+    font-size: 14px;
+    color: #778899;
+    line-height: 1.6;
+  }
+
+  /* ── MOBILE NAV MENU ── */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 72px; left: 0; right: 0;
+    background: rgba(10, 22, 40, 0.98);
+    backdrop-filter: blur(12px);
+    padding: 1.5rem 2rem;
+    z-index: 999;
+    border-bottom: 1px solid rgba(245,184,0,0.15);
+  }
+
+  .mobile-menu.open { display: block; }
+
+  .mobile-menu a {
+    display: block;
+    padding: 12px 0;
+    font-family: var(--font-condensed);
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    cursor: pointer;
+    transition: var(--transition);
+  }
+
+  .mobile-menu a:hover { color: var(--gold); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .hero-content { grid-template-columns: 1fr; gap: 2rem; padding-top: 100px; }
+    .hero-right { display: none; }
+    .hero-heading { font-size: 52px; }
+    .about-grid { grid-template-columns: 1fr; }
+    .about-image-stack { height: 300px; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .branding-showcase { grid-template-columns: 1fr; }
+    .branding-showcase.reverse { direction: ltr; }
+    .footer-bottom { flex-direction: column; gap: 1rem; }
+    .hero-stats { gap: 1.5rem; }
+    .page-hero { padding: 130px 1.5rem 60px; }
+  }
+
+  @media (max-width: 480px) {
+    .footer-top { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .cards-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── NOTIFICATION ── */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: var(--navy);
+    color: var(--white);
+    padding: 14px 20px;
+    border-radius: 10px;
+    border-left: 4px solid var(--gold);
+    font-family: var(--font-condensed);
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    z-index: 9999;
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.3s ease;
+  }
+
+  .toast.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="mainNav">
+  <div class="nav-inner">
+    <div class="nav-logo" onclick="showPage('home')">
+      <img src="https://lh3.googleusercontent.com/d/1fyug82cqnCpbR0ZkskFT0oUYFsA24Hm5" alt="Brandplus Studio Logo" class="nav-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="nav-logo-fallback" style="display:none">B+</div>
+      <div class="nav-brand">
+        <span class="nav-brand-name">BRANDPLUS</span>
+        <span class="nav-brand-sub">Studio</span>
+      </div>
+    </div>
+    <ul class="nav-links">
+      <li><a onclick="showPage('home')" class="active" id="nav-home">Home</a></li>
+      <li><a onclick="showPage('jerseys')" id="nav-jerseys">Jerseys</a></li>
+      <li><a onclick="showPage('services')" id="nav-services">Services</a></li>
+      <li><a onclick="showPage('branding')" id="nav-branding">Branding</a></li>
+      <li><a onclick="showPage('about')" id="nav-about">About</a></li>
+      <li><a onclick="showPage('contact')" class="nav-cta" id="nav-contact">Contact</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a onclick="showPage('home');toggleMenu()">Home</a>
+  <a onclick="showPage('jerseys');toggleMenu()">Jerseys</a>
+  <a onclick="showPage('services');toggleMenu()">Services</a>
+  <a onclick="showPage('branding');toggleMenu()">Branding</a>
+  <a onclick="showPage('about');toggleMenu()">About</a>
+  <a onclick="showPage('contact');toggleMenu()">Contact Us</a>
+</div>
+
+<!-- ═══════════════════════════════════ HOME PAGE ═══════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-bg-poster">
+      <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv" alt="">
+      <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv" alt="" style="object-position: 30% center">
+      <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv" alt="" style="object-position: 60% center">
+      <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv" alt="" style="object-position: 90% center">
+    </div>
+    <div class="hero-bg-overlay"></div>
+    <div class="hero-diagonal"></div>
+
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          <span>Kenya's Creative Force</span>
+        </div>
+        <h1 class="hero-heading">
+          TURNING YOUR<br>
+          <span class="accent">IMAGINATION</span><br>
+          <span class="stroke">INTO REALITY</span>
+        </h1>
+        <p class="hero-sub">
+          Home of creatives — where imagination meets reality. Premium jerseys, custom merchandise, and professional branding services all under one roof.
+        </p>
+        <div class="hero-buttons">
+          <button class="btn-primary" onclick="showPage('jerseys')">
+            <span>🎽</span> View Jerseys
+          </button>
+          <button class="btn-outline" onclick="showPage('services')">
+            View Services →
+          </button>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="num">200+</div>
+            <div class="label">Jerseys Made</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num">50+</div>
+            <div class="label">Brands Built</div>
+          </div>
+          <div class="hero-stat">
+            <div class="num">100%</div>
+            <div class="label">Creative</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-visual-frame">
+          <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv"
+            alt="Brandplus Studio Poster"
+            class="hero-poster-main"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="hero-poster-fallback" style="display:none">
+            <img src="https://lh3.googleusercontent.com/d/1fyug82cqnCpbR0ZkskFT0oUYFsA24Hm5"
+              alt="Logo"
+              class="hero-logo-big"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+            <div class="hero-logo-big-fallback" style="display:none">B+</div>
+            <div style="text-align:center">
+              <div style="font-family:var(--font-display);font-size:28px;color:var(--white);letter-spacing:2px">BRANDPLUS</div>
+              <div style="font-family:var(--font-condensed);font-size:11px;color:var(--gold);letter-spacing:4px;text-transform:uppercase">STUDIO</div>
+            </div>
+          </div>
+          <div class="hero-visual-badge">
+            <span class="num">★ 5.0</span>
+            <span class="label">Creative Agency</span>
+          </div>
+          <div class="hero-visual-tag">Est. 2020</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Highlight -->
+  <section class="services-strip">
+    <div class="services-strip-inner">
+      <div class="section-header">
+        <div class="section-label">What We Do</div>
+        <h2 class="section-title">EVERYTHING YOU NEED<br>TO <span class="accent">STAND OUT</span></h2>
+        <p class="section-sub">From football jerseys to full brand identities — we craft your vision with precision.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card" onclick="showPage('jerseys')">
+          <div class="service-card-icon">🎽</div>
+          <div class="service-card-title">Jersey Selling</div>
+          <div class="service-card-desc">Premium football jerseys — club kits, custom designs, international replicas. Quality you can feel.</div>
+          <div class="service-card-arrow">Explore Jerseys →</div>
+        </div>
+        <div class="service-card" onclick="showPage('services')">
+          <div class="service-card-icon">🖨️</div>
+          <div class="service-card-title">Jersey Customization</div>
+          <div class="service-card-desc">Names, numbers, patches — we customize your jersey to perfection with state-of-the-art printing.</div>
+          <div class="service-card-arrow">Learn More →</div>
+        </div>
+        <div class="service-card" onclick="showPage('branding')">
+          <div class="service-card-icon">💡</div>
+          <div class="service-card-title">Business Branding</div>
+          <div class="service-card-desc">Logo design, website development, brand identity — we build brands that command attention.</div>
+          <div class="service-card-arrow">See Work →</div>
+        </div>
+        <div class="service-card" onclick="showPage('services')">
+          <div class="service-card-icon">🛍️</div>
+          <div class="service-card-title">Merchandise Printing</div>
+          <div class="service-card-desc">Hoodies, mugs, caps — custom merchandise that keeps your brand visible everywhere.</div>
+          <div class="service-card-arrow">Order Now →</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products Strip -->
+  <section class="section">
+    <div class="section-header">
+      <div class="section-label">Featured</div>
+      <h2 class="section-title">HOT RIGHT <span class="accent">NOW</span></h2>
+      <p class="section-sub">Our most popular jerseys and merchandise, ready to order or customize.</p>
+    </div>
+    <div class="cards-grid">
+      <div class="product-card">
+        <div class="product-card-img-placeholder" style="background:linear-gradient(135deg,#0A1628,#1A3A5C)">
+          <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv" style="width:100%;height:100%;object-fit:cover;border-radius:0" onerror="this.parentElement.innerHTML='🎽'">
+        </div>
+        <div class="product-card-body">
+          <span class="product-card-tag">Jersey</span>
+          <div class="product-card-title">Club Collection</div>
+          <p class="product-card-desc">Premium replica jerseys from top clubs worldwide. Authentic quality, unbeatable style.</p>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-img-placeholder" style="background:linear-gradient(135deg,#E8621A,#F5B800)">
+          <div style="font-size:64px">🏆</div>
+        </div>
+        <div class="product-card-body">
+          <span class="product-card-tag">Custom</span>
+          <div class="product-card-title">Custom Kits</div>
+          <p class="product-card-desc">Design your team's identity. Custom colors, logos, names and numbers — fully personalized.</p>
+        </div>
+      </div>
+      <div class="product-card">
+        <div class="product-card-img-placeholder" style="background:linear-gradient(135deg,#1A3A5C,#0A1628)">
+          <div style="font-size:64px">👕</div>
+        </div>
+        <div class="product-card-body">
+          <span class="product-card-tag">Merch</span>
+          <div class="product-card-title">Brand Merchandise</div>
+          <p class="product-card-desc">Hoodies, caps, mugs and more — branded with your logo and style for maximum visibility.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Band -->
+  <section class="poster-section">
+    <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv" class="poster-bg" alt="" onerror="this.style.display='none'">
+    <div class="poster-bg-fallback"></div>
+    <div class="poster-overlay"></div>
+    <div class="poster-content">
+      <div class="section-label" style="justify-content:center;color:var(--gold)">Get Started Today</div>
+      <h2 class="section-title" style="color:var(--white);margin-bottom:1rem">READY TO BUILD<br>YOUR <span class="accent">BRAND?</span></h2>
+      <p class="section-sub" style="color:rgba(255,255,255,0.6);margin:0 auto 2.5rem">Let Brandplus Studio bring your creative vision to life. From jerseys to full brand packages.</p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap">
+        <button class="btn-primary" onclick="showPage('contact')">Start a Project</button>
+        <button class="btn-outline" onclick="showPage('about')">Our Story</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <img src="https://lh3.googleusercontent.com/d/1fyug82cqnCpbR0ZkskFT0oUYFsA24Hm5" style="height:52px;border-radius:8px;border:2px solid rgba(245,184,0,0.3)" onerror="this.style.display='none'">
+          <div class="footer-brand-name">BRANDPLUS STUDIO</div>
+          <p class="footer-brand-desc">Where imagination meets reality. Creative branding, custom jerseys, and merchandise printing in Kenya.</p>
+        </div>
+        <div>
+          <div class="footer-heading">Navigate</div>
+          <ul class="footer-links">
+            <li><a onclick="showPage('home')">Home</a></li>
+            <li><a onclick="showPage('jerseys')">Jerseys</a></li>
+            <li><a onclick="showPage('services')">Services</a></li>
+            <li><a onclick="showPage('branding')">Branding</a></li>
+            <li><a onclick="showPage('about')">About</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Services</div>
+          <ul class="footer-links">
+            <li><a>Jersey Selling</a></li>
+            <li><a>Customization</a></li>
+            <li><a>Logo Design</a></li>
+            <li><a>Web Development</a></li>
+            <li><a>Merch Printing</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-heading">Contact</div>
+          <ul class="footer-links">
+            <li><a>brandplusstudio.com</a></li>
+            <li><a>@brandplus_studio</a></li>
+            <li><a>Kula Mawe</a></li>
+            <li><a>Catholic-Kambi ya Juu Hwy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 Brandplus Studio. All rights reserved.</span>
+        <div class="footer-bottom-social">
+          <a class="footer-social-link" title="Instagram">📸</a>
+          <a class="footer-social-link" title="Facebook">📘</a>
+          <a class="footer-social-link" title="WhatsApp">💬</a>
+          <a class="footer-social-link" title="TikTok">🎵</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════ JERSEYS PAGE ═══════════════════════════════════ -->
+<div class="page" id="page-jerseys">
+  <div class="page-hero">
+    <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv" class="page-hero-bg" alt="" onerror="this.style.display='none'">
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <div class="section-label" style="justify-content:center;margin-bottom:1rem">Collection 2025</div>
+      <h1 class="page-hero-title">JERSEY <span class="accent">COLLECTION</span></h1>
+      <p class="page-hero-sub">Premium quality football jerseys — authentic replicas, custom kits, and exclusive designs crafted for champions.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:3rem;flex-wrap:wrap;gap:1rem">
+      <div>
+        <div class="section-label">Browse All</div>
+        <h2 class="section-title">OUR <span class="accent">JERSEYS</span></h2>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn-outline" style="padding:8px 16px;font-size:12px;border-color:rgba(10,22,40,0.2);color:var(--navy)">All Jerseys</button>
+        <button class="btn-outline" style="padding:8px 16px;font-size:12px;border-color:rgba(10,22,40,0.2);color:var(--navy)">Club Kits</button>
+        <button class="btn-outline" style="padding:8px 16px;font-size:12px;border-color:rgba(10,22,40,0.2);color:var(--navy)">Custom</button>
+        <button class="btn-outline" style="padding:8px 16px;font-size:12px;border-color:rgba(10,22,40,0.2);color:var(--navy)">Training</button>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:2rem">
+      <!-- Jersey cards -->
+      <div class="jersey-card">
+        <div class="jersey-img-wrap">
+          <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv" alt="Club Jersey" onerror="this.style.display='none';this.parentElement.querySelector('.jersey-emoji').style.display='block'">
+          <div class="jersey-emoji" style="display:none">🎽</div>
+          <div class="jersey-badge">Club Kit</div>
+        </div>
+        <div class="jersey-body">
+          <div class="jersey-name">Classic Club Jersey</div>
+          <p class="jersey-desc">Authentic replica from premium breathable fabric. Perfect for match days and casual wear.</p>
+        </div>
+      </div>
+
+      <div class="jersey-card">
+        <div class="jersey-img-wrap" style="background:linear-gradient(135deg,#E8621A22,#F5B80022)">
+          <div class="jersey-emoji">⚽</div>
+          <div class="jersey-badge">Custom</div>
+        </div>
+        <div class="jersey-body">
+          <div class="jersey-name">Custom Team Kit</div>
+          <p class="jersey-desc">Full custom design with your team colors, crest, and player names. Order for full squads.</p>
+        </div>
+      </div>
+
+      <div class="jersey-card">
+        <div class="jersey-img-wrap" style="background:linear-gradient(135deg,#0A162822,#1A3A5C22)">
+          <div class="jersey-emoji">🏅</div>
+          <div class="jersey-badge">Premium</div>
+        </div>
+        <div class="jersey-body">
+          <div class="jersey-name">International Replica</div>
+          <p class="jersey-desc">High-quality international team replicas from Africa and Europe. Show your national pride.</p>
+        </div>
+      </div>
+
+      <div class="jersey-card">
+        <div class="jersey-img-wrap" style="background:linear-gradient(135deg,#F5B80022,#0A162822)">
+          <div class="jersey-emoji">🥅</div>
+          <div class="jersey-badge">Training</div>
+        </div>
+        <div class="jersey-body">
+          <div class="jersey-name">Training Jersey</div>
+          <p class="jersey-desc">Lightweight performance training wear. Moisture-wicking fabric keeps you cool on the pitch.</p>
+        </div>
+      </div>
+
+      <div class="jersey-card">
+        <div class="jersey-img-wrap" style="background:linear-gradient(135deg,#1A3A5C22,#E8621A22)">
+          <div class="jersey-emoji">🎖️</div>
+          <div class="jersey-badge">Limited</div>
+        </div>
+        <div class="jersey-body">
+          <div class="jersey-name">Retro Edition</div>
+          <p class="jersey-desc">Classic vintage-style football shirts. Limited edition retro cuts celebrating football history.</p>
+        </div>
+      </div>
+
+      <div class="jersey-card">
+        <div class="jersey-img-wrap" style="background:linear-gradient(135deg,#F5B80033,#E8621A22)">
+          <div class="jersey-emoji">🌟</div>
+          <div class="jersey-badge">Signature</div>
+        </div>
+        <div class="jersey-body">
+          <div class="jersey-name">Brandplus Signature</div>
+          <p class="jersey-desc">Our in-house designed exclusive collection — street-inspired football culture meets fashion.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Band -->
+  <section style="background:var(--navy);padding:80px 2rem;text-align:center">
+    <div style="max-width:600px;margin:0 auto">
+      <div class="section-label" style="justify-content:center;color:var(--gold)">Custom Order</div>
+      <h2 class="section-title" style="color:var(--white);margin-bottom:1rem">WANT A CUSTOM <span class="accent">JERSEY?</span></h2>
+      <p style="color:rgba(255,255,255,0.55);margin-bottom:2rem;line-height:1.7">We print names, numbers, badges and custom graphics. Contact us to discuss your team's needs.</p>
+      <button class="btn-primary" onclick="showPage('contact')">Request Custom Order</button>
+    </div>
+  </section>
+
+  <!-- Shared Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <img src="https://lh3.googleusercontent.com/d/1fyug82cqnCpbR0ZkskFT0oUYFsA24Hm5" style="height:52px;border-radius:8px;border:2px solid rgba(245,184,0,0.3)" onerror="this.style.display='none'">
+          <div class="footer-brand-name">BRANDPLUS STUDIO</div>
+          <p class="footer-brand-desc">Where imagination meets reality. Creative branding, custom jerseys, and merchandise printing.</p>
+        </div>
+        <div><div class="footer-heading">Navigate</div><ul class="footer-links"><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('jerseys')">Jerseys</a></li><li><a onclick="showPage('services')">Services</a></li><li><a onclick="showPage('branding')">Branding</a></li></ul></div>
+        <div><div class="footer-heading">Services</div><ul class="footer-links"><li><a>Jersey Selling</a></li><li><a>Customization</a></li><li><a>Logo Design</a></li><li><a>Web Development</a></li></ul></div>
+        <div><div class="footer-heading">Contact</div><ul class="footer-links"><li><a>brandplusstudio.com</a></li><li><a>@brandplus_studio</a></li><li><a>Kula Mawe</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 Brandplus Studio. All rights reserved.</span><div class="footer-bottom-social"><a class="footer-social-link">📸</a><a class="footer-social-link">📘</a><a class="footer-social-link">💬</a></div></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════ SERVICES PAGE ═══════════════════════════════════ -->
+<div class="page" id="page-services">
+  <div class="page-hero">
+    <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv" class="page-hero-bg" alt="" onerror="this.style.display='none'">
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <div class="section-label" style="justify-content:center">Full Service Studio</div>
+      <h1 class="page-hero-title">OUR <span class="accent">SERVICES</span></h1>
+      <p class="page-hero-sub">From jersey customization to full brand identity — every creative need, one studio.</p>
+    </div>
+  </div>
+
+  <!-- Service 1: Jersey Selling -->
+  <section style="padding:100px 2rem;background:var(--off-white)">
+    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center" class="service-detail-grid">
+      <div>
+        <div class="section-label">01 / Service</div>
+        <h2 class="section-title">JERSEY <span class="accent">SELLING</span></h2>
+        <div class="divider"></div>
+        <p style="font-size:16px;color:#556677;line-height:1.8;margin-bottom:1.5rem">We stock a premium selection of football jerseys from top clubs and national teams. Whether you want the latest EPL kit, an African champions replica, or a rare vintage edition — we source quality you can trust.</p>
+        <ul class="values-list">
+          <li>Authentic quality replica jerseys from global clubs</li>
+          <li>African, European and international national team kits</li>
+          <li>Vintage and retro editions for collectors</li>
+          <li>Bulk orders for schools, companies and events</li>
+        </ul>
+        <button class="btn-primary" style="margin-top:2rem" onclick="showPage('jerseys')">Browse Collection →</button>
+      </div>
+      <div class="branding-img">
+        <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv" alt="Jersey Service" onerror="this.style.display='none';this.parentElement.innerHTML='<div style=\'font-size:80px;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0A1628,#1A3A5C)\'>🎽</div>'">
+      </div>
+    </div>
+  </section>
+
+  <!-- Service 2: Customization -->
+  <section style="padding:100px 2rem;background:var(--white)">
+    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center">
+      <div class="branding-img">
+        <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv" alt="Printing Service" onerror="this.parentElement.innerHTML='<div style=\'font-size:80px;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#E8621A,#F5B800)\'>🖨️</div>'">
+      </div>
+      <div>
+        <div class="section-label">02 / Service</div>
+        <h2 class="section-title">JERSEY <span class="accent">CUSTOMIZATION</span></h2>
+        <div class="divider"></div>
+        <p style="font-size:16px;color:#556677;line-height:1.8;margin-bottom:1.5rem">Bring your own jersey or buy from us — we'll transform it into something uniquely yours. State-of-the-art printing technology ensures your customization is sharp, durable, and professional.</p>
+        <ul class="values-list">
+          <li>Player names and numbers with heat transfer & vinyl</li>
+          <li>Patch and badge application (sleeve, chest, back)</li>
+          <li>Custom sponsor logos and branding</li>
+          <li>Full team kit customization for clubs and corporates</li>
+        </ul>
+        <button class="btn-primary" style="margin-top:2rem" onclick="showPage('contact')">Get a Quote →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service 3: Business Branding -->
+  <section style="padding:100px 2rem;background:var(--navy);position:relative;overflow:hidden">
+    <div style="position:absolute;inset:0;opacity:0.05">
+      <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv" style="width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'">
+    </div>
+    <div style="max-width:1280px;margin:0 auto;position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center">
+      <div>
+        <div class="section-label" style="color:var(--gold)">03 / Service</div>
+        <h2 class="section-title" style="color:var(--white)">BUSINESS <span class="accent">BRANDING</span></h2>
+        <div class="divider"></div>
+        <p style="font-size:16px;color:rgba(255,255,255,0.55);line-height:1.8;margin-bottom:1.5rem">Your brand is your identity. We craft logos that speak volumes, websites that convert, and brand systems that create lasting impressions in a crowded market.</p>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem">
+          <li style="display:flex;align-items:flex-start;gap:12px;font-size:15px;color:rgba(255,255,255,0.65)"><span style="color:var(--gold)">▸</span> Professional logo design and brand identity packages</li>
+          <li style="display:flex;align-items:flex-start;gap:12px;font-size:15px;color:rgba(255,255,255,0.65)"><span style="color:var(--gold)">▸</span> Website design and development for businesses</li>
+          <li style="display:flex;align-items:flex-start;gap:12px;font-size:15px;color:rgba(255,255,255,0.65)"><span style="color:var(--gold)">▸</span> Social media branding kits and templates</li>
+          <li style="display:flex;align-items:flex-start;gap:12px;font-size:15px;color:rgba(255,255,255,0.65)"><span style="color:var(--gold)">▸</span> Business cards, letterheads, and stationery design</li>
+        </ul>
+        <button class="btn-primary" style="margin-top:2rem" onclick="showPage('branding')">See Our Work →</button>
+      </div>
+      <div class="branding-img">
+        <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv" alt="Branding Service" onerror="this.parentElement.innerHTML='<div style=\'font-size:80px;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.05)\'>💡</div>'">
+      </div>
+    </div>
+  </section>
+
+  <!-- Service 4: Merchandise -->
+  <section style="padding:100px 2rem;background:var(--off-white)">
+    <div style="max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center">
+      <div class="branding-img">
+        <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv" alt="Merchandise" onerror="this.parentElement.innerHTML='<div style=\'font-size:80px;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0A1628,#1A3A5C)\'>🛍️</div>'">
+      </div>
+      <div>
+        <div class="section-label">04 / Service</div>
+        <h2 class="section-title">MERCHANDISE <span class="accent">PRINTING</span></h2>
+        <div class="divider"></div>
+        <p style="font-size:16px;color:#556677;line-height:1.8;margin-bottom:1.5rem">Turn your logo or design into a merchandise empire. From hoodies to mugs, caps to tote bags — we print quality merch that keeps your brand front and center.</p>
+        <ul class="values-list">
+          <li>Hoodies, t-shirts and caps with custom logo printing</li>
+          <li>Branded mugs, keyrings and promotional items</li>
+          <li>Event merchandise for concerts, launches and sports</li>
+          <li>Corporate branded gifts and uniform packages</li>
+        </ul>
+        <button class="btn-primary" style="margin-top:2rem" onclick="showPage('contact')">Order Merch →</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div><img src="https://lh3.googleusercontent.com/d/1fyug82cqnCpbR0ZkskFT0oUYFsA24Hm5" style="height:52px;border-radius:8px;border:2px solid rgba(245,184,0,0.3)" onerror="this.style.display='none'"><div class="footer-brand-name">BRANDPLUS STUDIO</div><p class="footer-brand-desc">Where imagination meets reality.</p></div>
+        <div><div class="footer-heading">Navigate</div><ul class="footer-links"><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('jerseys')">Jerseys</a></li><li><a onclick="showPage('services')">Services</a></li><li><a onclick="showPage('branding')">Branding</a></li></ul></div>
+        <div><div class="footer-heading">Services</div><ul class="footer-links"><li><a>Jersey Selling</a></li><li><a>Customization</a></li><li><a>Logo Design</a></li><li><a>Web Development</a></li></ul></div>
+        <div><div class="footer-heading">Contact</div><ul class="footer-links"><li><a>brandplusstudio.com</a></li><li><a>@brandplus_studio</a></li><li><a>Kula Mawe</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 Brandplus Studio. All rights reserved.</span><div class="footer-bottom-social"><a class="footer-social-link">📸</a><a class="footer-social-link">📘</a><a class="footer-social-link">💬</a></div></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════ BRANDING PAGE ═══════════════════════════════════ -->
+<div class="page" id="page-branding">
+  <div class="page-hero">
+    <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv" class="page-hero-bg" alt="" onerror="this.style.display='none'">
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <div class="section-label" style="justify-content:center">Creative Studio</div>
+      <h1 class="page-hero-title">BRANDING <span class="accent">WORK</span></h1>
+      <p class="page-hero-sub">We design logos, build websites, and craft brand identities that help businesses stand out and grow.</p>
+    </div>
+  </div>
+
+  <!-- Logo Design -->
+  <section class="section">
+    <div class="branding-showcase">
+      <div>
+        <div class="section-label">01</div>
+        <h2 class="section-title">LOGO <span class="accent">DESIGN</span></h2>
+        <div class="divider"></div>
+        <p style="font-size:16px;color:#556677;line-height:1.8;margin-bottom:1.5rem">A great logo is the foundation of your brand. We create distinctive, meaningful logo marks that communicate who you are instantly. From concept sketches to polished vector files — ready for print and digital.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin:1.5rem 0">
+          <div style="background:rgba(245,184,0,0.08);border:1px solid rgba(245,184,0,0.2);border-radius:12px;padding:1.25rem">
+            <div style="font-family:var(--font-display);font-size:28px;color:var(--gold);line-height:1">Logo Mark</div>
+            <div style="font-size:13px;color:#778899;margin-top:6px">Custom icon + wordmark</div>
+          </div>
+          <div style="background:rgba(232,98,26,0.08);border:1px solid rgba(232,98,26,0.2);border-radius:12px;padding:1.25rem">
+            <div style="font-family:var(--font-display);font-size:28px;color:var(--orange);line-height:1">Brand Kit</div>
+            <div style="font-size:13px;color:#778899;margin-top:6px">Colors, fonts, guidelines</div>
+          </div>
+          <div style="background:rgba(10,22,40,0.05);border:1px solid rgba(10,22,40,0.1);border-radius:12px;padding:1.25rem">
+            <div style="font-family:var(--font-display);font-size:28px;color:var(--navy);line-height:1">Print Ready</div>
+            <div style="font-size:13px;color:#778899;margin-top:6px">SVG, PNG, PDF files</div>
+          </div>
+          <div style="background:rgba(245,184,0,0.06);border:1px solid rgba(245,184,0,0.15);border-radius:12px;padding:1.25rem">
+            <div style="font-family:var(--font-display);font-size:28px;color:var(--gold-dark);line-height:1">Revisions</div>
+            <div style="font-size:13px;color:#778899;margin-top:6px">Until you love it</div>
+          </div>
+        </div>
+        <button class="btn-primary" onclick="showPage('contact')">Start Logo Project →</button>
+      </div>
+      <div class="branding-img">
+        <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv" alt="Logo Design" onerror="this.parentElement.innerHTML='<div style=\'font-size:80px;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0A1628,#1A3A5C);border-radius:16px\'>✏️</div>'">
+      </div>
+    </div>
+
+    <!-- Web Dev -->
+    <div class="branding-showcase reverse">
+      <div>
+        <div class="section-label">02</div>
+        <h2 class="section-title">WEB <span class="accent">DEVELOPMENT</span></h2>
+        <div class="divider"></div>
+        <p style="font-size:16px;color:#556677;line-height:1.8;margin-bottom:1.5rem">Your website is your digital storefront. We build fast, beautiful, mobile-first websites that represent your brand powerfully online — from portfolios to e-commerce to business sites.</p>
+        <ul class="values-list">
+          <li>Mobile-first responsive design for all devices</li>
+          <li>E-commerce stores with payment integration</li>
+          <li>Portfolio and showcase sites for creatives</li>
+          <li>Business websites with SEO optimization</li>
+          <li>Landing pages built to convert visitors</li>
+        </ul>
+        <button class="btn-primary" style="margin-top:2rem" onclick="showPage('contact')">Discuss Your Site →</button>
+      </div>
+      <div class="branding-img">
+        <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv" alt="Web Development" onerror="this.parentElement.innerHTML='<div style=\'font-size:80px;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#E8621A,#F5B800);border-radius:16px\'>💻</div>'">
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section style="background:var(--navy);padding:100px 2rem">
+    <div style="max-width:1280px;margin:0 auto">
+      <div class="section-header" style="text-align:center">
+        <div class="section-label" style="justify-content:center;color:var(--gold)">How We Work</div>
+        <h2 class="section-title" style="color:var(--white)">THE CREATIVE <span class="accent">PROCESS</span></h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;margin-top:3rem">
+        <div style="text-align:center;padding:2rem 1rem">
+          <div style="width:64px;height:64px;background:rgba(245,184,0,0.15);border:1px solid rgba(245,184,0,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-size:28px;color:var(--gold)">01</div>
+          <div style="font-family:var(--font-condensed);font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px">Discovery</div>
+          <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7">We learn your brand, audience and goals in a detailed brief session.</p>
+        </div>
+        <div style="text-align:center;padding:2rem 1rem">
+          <div style="width:64px;height:64px;background:rgba(245,184,0,0.15);border:1px solid rgba(245,184,0,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-size:28px;color:var(--gold)">02</div>
+          <div style="font-family:var(--font-condensed);font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px">Concept</div>
+          <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7">Initial design concepts are developed and presented for feedback.</p>
+        </div>
+        <div style="text-align:center;padding:2rem 1rem">
+          <div style="width:64px;height:64px;background:rgba(245,184,0,0.15);border:1px solid rgba(245,184,0,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-size:28px;color:var(--gold)">03</div>
+          <div style="font-family:var(--font-condensed);font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px">Refinement</div>
+          <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7">We refine the chosen direction based on your input until perfect.</p>
+        </div>
+        <div style="text-align:center;padding:2rem 1rem">
+          <div style="width:64px;height:64px;background:rgba(245,184,0,0.15);border:1px solid rgba(245,184,0,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;font-family:var(--font-display);font-size:28px;color:var(--gold)">04</div>
+          <div style="font-family:var(--font-condensed);font-size:18px;font-weight:700;color:var(--white);margin-bottom:8px">Delivery</div>
+          <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7">All files delivered in the formats you need, ready to use everywhere.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div><img src="https://lh3.googleusercontent.com/d/1fyug82cqnCpbR0ZkskFT0oUYFsA24Hm5" style="height:52px;border-radius:8px;border:2px solid rgba(245,184,0,0.3)" onerror="this.style.display='none'"><div class="footer-brand-name">BRANDPLUS STUDIO</div><p class="footer-brand-desc">Where imagination meets reality.</p></div>
+        <div><div class="footer-heading">Navigate</div><ul class="footer-links"><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('jerseys')">Jerseys</a></li><li><a onclick="showPage('services')">Services</a></li><li><a onclick="showPage('branding')">Branding</a></li></ul></div>
+        <div><div class="footer-heading">Services</div><ul class="footer-links"><li><a>Jersey Selling</a></li><li><a>Logo Design</a></li><li><a>Web Development</a></li><li><a>Merch Printing</a></li></ul></div>
+        <div><div class="footer-heading">Contact</div><ul class="footer-links"><li><a>brandplusstudio.com</a></li><li><a>@brandplus_studio</a></li><li><a>Kula Mawe</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 Brandplus Studio. All rights reserved.</span><div class="footer-bottom-social"><a class="footer-social-link">📸</a><a class="footer-social-link">📘</a><a class="footer-social-link">💬</a></div></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════ ABOUT PAGE ═══════════════════════════════════ -->
+<div class="page" id="page-about">
+  <div class="page-hero">
+    <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv" class="page-hero-bg" alt="" onerror="this.style.display='none'">
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <div class="section-label" style="justify-content:center">Our Story</div>
+      <h1 class="page-hero-title">ABOUT <span class="accent">US</span></h1>
+      <p class="page-hero-sub">Born from passion, built with purpose. Brandplus Studio is where football culture collides with creative business.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="about-grid">
+      <div class="about-image-stack">
+        <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv"
+          alt="Studio" class="about-img-main"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="about-img-placeholder main" style="display:none">🏟️</div>
+
+        <img src="https://lh3.googleusercontent.com/d/1fyug82cqnCpbR0ZkskFT0oUYFsA24Hm5"
+          alt="Logo" class="about-img-secondary"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="about-img-placeholder secondary" style="display:none">🎨</div>
+
+        <div class="about-accent-box">
+          <div class="num">5+</div>
+          <div class="lbl">Years Creative</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label">Who We Are</div>
+        <h2 class="section-title">CREATIVITY<br>MEETS <span class="accent">PURPOSE</span></h2>
+        <div class="divider"></div>
+        <p style="font-size:16px;color:#556677;line-height:1.8;margin-bottom:1.25rem">Brandplus Studio was born out of a simple but powerful idea: that creativity should be accessible, purposeful, and fearless. Founded along the Catholic-Kambi ya Juu Highway in Kula Mawe, we started as a small jersey shop and grew into a full-service creative studio.</p>
+        <p style="font-size:16px;color:#556677;line-height:1.8;margin-bottom:1.5rem">We believe football isn't just a sport — it's a culture, a language, and a canvas. We've taken that energy and applied it to every service we offer: branding that's bold, websites that convert, merchandise that turns heads, and jerseys that make you feel like a champion.</p>
+
+        <ul class="values-list">
+          <li>Football culture + professional design = Brandplus DNA</li>
+          <li>We work with local businesses, teams, schools and corporates</li>
+          <li>Every project gets the same passion — big or small</li>
+          <li>Based in Kenya, thinking globally</li>
+        </ul>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(10,22,40,0.1)">
+          <div style="text-align:center">
+            <div style="font-family:var(--font-display);font-size:40px;color:var(--orange);line-height:1">200+</div>
+            <div style="font-family:var(--font-condensed);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#889aaa;margin-top:4px">Jerseys Made</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-family:var(--font-display);font-size:40px;color:var(--orange);line-height:1">50+</div>
+            <div style="font-family:var(--font-condensed);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#889aaa;margin-top:4px">Brands Built</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-family:var(--font-display);font-size:40px;color:var(--orange);line-height:1">100%</div>
+            <div style="font-family:var(--font-condensed);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#889aaa;margin-top:4px">Satisfaction</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission band -->
+  <section style="background:var(--navy);padding:100px 2rem">
+    <div style="max-width:800px;margin:0 auto;text-align:center">
+      <div class="section-label" style="justify-content:center;color:var(--gold)">Our Mission</div>
+      <h2 class="section-title" style="color:var(--white);margin-bottom:1.5rem">TO TURN EVERY<br><span class="accent">CREATIVE DREAM</span><br>INTO REALITY</h2>
+      <p style="font-size:18px;color:rgba(255,255,255,0.55);line-height:1.8;font-weight:300">"We don't just design for clients — we build dreams with them. Every jersey we print, every logo we craft, every website we launch is a story of someone's vision coming to life. That's why we exist."</p>
+      <div style="margin-top:1.5rem;font-family:var(--font-condensed);font-size:13px;letter-spacing:2px;color:var(--gold);text-transform:uppercase">— Brandplus Studio Team</div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div><img src="https://lh3.googleusercontent.com/d/1fyug82cqnCpbR0ZkskFT0oUYFsA24Hm5" style="height:52px;border-radius:8px;border:2px solid rgba(245,184,0,0.3)" onerror="this.style.display='none'"><div class="footer-brand-name">BRANDPLUS STUDIO</div><p class="footer-brand-desc">Where imagination meets reality.</p></div>
+        <div><div class="footer-heading">Navigate</div><ul class="footer-links"><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('jerseys')">Jerseys</a></li><li><a onclick="showPage('services')">Services</a></li><li><a onclick="showPage('branding')">Branding</a></li></ul></div>
+        <div><div class="footer-heading">Services</div><ul class="footer-links"><li><a>Jersey Selling</a></li><li><a>Logo Design</a></li><li><a>Web Development</a></li><li><a>Merch Printing</a></li></ul></div>
+        <div><div class="footer-heading">Contact</div><ul class="footer-links"><li><a>brandplusstudio.com</a></li><li><a>@brandplus_studio</a></li><li><a>Kula Mawe</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 Brandplus Studio. All rights reserved.</span><div class="footer-bottom-social"><a class="footer-social-link">📸</a><a class="footer-social-link">📘</a><a class="footer-social-link">💬</a></div></div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════════════════ CONTACT PAGE ═══════════════════════════════════ -->
+<div class="page" id="page-contact">
+  <div class="page-hero">
+    <img src="https://lh3.googleusercontent.com/d/1l8BBG5J8-ONl7pdffyhpnBSO_6XNaGXv" class="page-hero-bg" alt="" onerror="this.style.display='none'">
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <div class="section-label" style="justify-content:center">Let's Talk</div>
+      <h1 class="page-hero-title">GET IN <span class="accent">TOUCH</span></h1>
+      <p class="page-hero-sub">Have a project in mind? Want to order jerseys or discuss branding? We'd love to hear from you.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="contact-grid">
+      <div>
+        <div class="section-label">Contact Info</div>
+        <h2 class="section-title" style="margin-bottom:2rem">REACH <span class="accent">US</span></h2>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon">🌐</div>
+          <div>
+            <div class="contact-info-label">Website</div>
+            <div class="contact-info-value" style="color:var(--orange)">brandplusstudio.com</div>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon">📸</div>
+          <div>
+            <div class="contact-info-label">Instagram</div>
+            <div class="contact-info-value">@brandplus_studio</div>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon">📍</div>
+          <div>
+            <div class="contact-info-label">Location</div>
+            <div class="contact-info-value">Kula Mawe, Catholic-Kambi ya Juu Highway</div>
+          </div>
+        </div>
+
+        <div class="contact-info-item">
+          <div class="contact-info-icon">⏰</div>
+          <div>
+            <div class="contact-info-label">Working Hours</div>
+            <div class="contact-info-value">Mon – Sat: 8:00 AM – 7:00 PM</div>
+          </div>
+        </div>
+
+        <!-- Map Visual -->
+        <div class="map-visual">
+          <div class="map-pin">
+            <div class="map-pin-icon"><span>📍</span></div>
+            <p>Brandplus Studio</p>
+            <small>Kula Mawe, Kenya</small>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="section-label">Send Message</div>
+        <h2 class="section-title" style="margin-bottom:2rem">DROP A <span class="accent">MESSAGE</span></h2>
+
+        <div class="contact-form">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="your@email.com">
+          </div>
+          <div class="form-group">
+            <label>Phone / WhatsApp</label>
+            <input type="tel" placeholder="+254 ...">
+          </div>
+          <div class="form-group">
+            <label>Service Needed</label>
+            <select>
+              <option value="">Select a service...</option>
+              <option>Jersey Purchase</option>
+              <option>Jersey Customization</option>
+              <option>Logo Design</option>
+              <option>Website Development</option>
+              <option>Merchandise Printing</option>
+              <option>Full Brand Package</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Message</label>
+            <textarea placeholder="Tell us about your project, jersey order, or branding needs..."></textarea>
+          </div>
+          <button class="btn-primary" style="width:100%;justify-content:center;padding:16px" onclick="submitForm()">
+            Send Message →
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div><img src="https://lh3.googleusercontent.com/d/1fyug82cqnCpbR0ZkskFT0oUYFsA24Hm5" style="height:52px;border-radius:8px;border:2px solid rgba(245,184,0,0.3)" onerror="this.style.display='none'"><div class="footer-brand-name">BRANDPLUS STUDIO</div><p class="footer-brand-desc">Where imagination meets reality. Based in Kula Mawe, Kenya.</p></div>
+        <div><div class="footer-heading">Navigate</div><ul class="footer-links"><li><a onclick="showPage('home')">Home</a></li><li><a onclick="showPage('jerseys')">Jerseys</a></li><li><a onclick="showPage('services')">Services</a></li><li><a onclick="showPage('branding')">Branding</a></li></ul></div>
+        <div><div class="footer-heading">Services</div><ul class="footer-links"><li><a>Jersey Selling</a></li><li><a>Logo Design</a></li><li><a>Web Development</a></li><li><a>Merch Printing</a></li></ul></div>
+        <div><div class="footer-heading">Contact</div><ul class="footer-links"><li><a>brandplusstudio.com</a></li><li><a>@brandplus_studio</a></li><li><a>Kula Mawe</a></li><li><a>Catholic-Kambi ya Juu Hwy</a></li></ul></div>
+      </div>
+      <div class="footer-bottom"><span>© 2025 Brandplus Studio. All rights reserved.</span><div class="footer-bottom-social"><a class="footer-social-link">📸</a><a class="footer-social-link">📘</a><a class="footer-social-link">💬</a><a class="footer-social-link">🎵</a></div></div>
+    </div>
+  </footer>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script>
+  const PAGES = ['home','jerseys','services','branding','about','contact'];
+  let menuOpen = false;
+
+  function showPage(id) {
+    PAGES.forEach(p => {
+      document.getElementById('page-'+p).classList.remove('active');
+      const navEl = document.getElementById('nav-'+p);
+      if (navEl) navEl.classList.remove('active');
+    });
+    document.getElementById('page-'+id).classList.add('active');
+    const navEl = document.getElementById('nav-'+id);
+    if (navEl) navEl.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function toggleMenu() {
+    menuOpen = !menuOpen;
+    document.getElementById('mobileMenu').classList.toggle('open', menuOpen);
+  }
+
+  function submitForm() {
+    const toast = document.getElementById('toast');
+    toast.textContent = '✓ Message sent! We\'ll reply within 24 hours.';
+    toast.classList.add('show');
+    setTimeout(() => toast.classList.remove('show'), 4000);
+  }
+
+  // Mobile style tweaks for service detail grids
+  if (window.innerWidth < 768) {
+    document.querySelectorAll('.service-detail-grid').forEach(g => {
+      g.style.gridTemplateColumns = '1fr';
+    });
+  }
+
+  // Scroll-based nav styling
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('mainNav');
+    if (window.scrollY > 60) {
+      nav.style.background = 'rgba(10,22,40,0.99)';
+    } else {
+      nav.style.background = 'rgba(10,22,40,0.96)';
+    }
+  });
+</script>
+</body>
+</html>
